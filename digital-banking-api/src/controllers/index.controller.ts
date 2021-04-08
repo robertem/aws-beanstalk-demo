@@ -7,4 +7,8 @@ const router: Router = Router();
 router.use('/banks', BankRouter);
 router.use('/channels', ChannelRouter);
 
+router.get('/', async (req: Request, res: Response) => {
+    res.send('OK');
+});
+
 export const IndexRouter: Router = router;
