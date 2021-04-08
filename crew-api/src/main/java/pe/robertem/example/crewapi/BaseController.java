@@ -19,7 +19,7 @@ public class BaseController {
         RepresentationModel rootResource = new RepresentationModel();
 
         rootResource.add(
-                linkTo(methodOn(CrewApiApplication.class).root()).withSelfRel(),
+                linkTo(methodOn(BaseController.class).root()).withSelfRel(),
                 linkTo(methodOn(CrewController.class).findAll()).withRel("crews"),
                 linkTo(methodOn(MemberController.class).findAll()).withRel("members")
         );
