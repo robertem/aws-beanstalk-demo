@@ -2,12 +2,12 @@
   "name": "digital-banking-api",
   "version": "1.0.0",
   "description": "Demo project using nodejs",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && cp package.json dist/package.json && cd dist && zip -r artifact.zip . && cd ..",
     "clean": "rimraf ./dist",
     "dev": "nodemon ./src/server.ts",
-    "start": "npm run build && node ./dist/server.js",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc"
   },
