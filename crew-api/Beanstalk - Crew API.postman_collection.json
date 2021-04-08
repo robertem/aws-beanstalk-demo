@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "c2ce0e44-8a9d-4193-bf7e-87aa0311fd14",
+		"name": "Beanstalk - Crew API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crew",
+			"item": [
+				{
+					"name": "Get crews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/crews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get crew by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/crews/CD",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crews",
+								"CD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create crew",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"CD\",\n    \"name\": \"Canales Digitales\",\n    \"description\": \"Crew de Canales Digitales TI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update crew",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Canales Digitales\",\n    \"description\": \"Crew Transformación Canales Digitales\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crews/CD",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crews",
+								"CD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete crew",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/crews/CD",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crews",
+								"CD"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Get members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/members",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get member by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/members/S00001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"members",
+								"S00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"S00001\",\n    \"name\": \"Robert Espinoza\",\n    \"role\": \"Software engineer 1\",\n    \"crew\": {\n        \"id\": \"CD\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/members",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Robert Espinoza\",\n    \"role\": \"Software engineer 2\",\n    \"crew\": {\n        \"id\": \"CD\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/members/S00001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"members",
+								"S00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/members/S00001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"members",
+								"S00001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "1011ef25-99f1-4348-a019-9c28dd944b91",
+		"name": "Beanstalk - Digital Banking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bank",
+			"item": [
+				{
+					"name": "Get banks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/banks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"banks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create bank",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"IBK\",\n    \"name\": \"Banco Internacional del Perú\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/banks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"banks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update bank",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Interbank\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/banks/IBK",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"banks",
+								"IBK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get bank by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/banks/IBK",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"banks",
+								"IBK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete bank",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/banks/IBK",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"banks",
+								"IBK"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Channel",
+			"item": [
+				{
+					"name": "Get channels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/channels",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create channel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"APP\",\n    \"name\": \"Mobile Banking\",\n    \"description\": \"Mobile application supported for Android and iOS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/channels",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update channel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mobile Banking\",\n    \"description\": \"Mobile application\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/channels/APP",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"channels",
+								"APP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/channels/APP",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"channels",
+								"APP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete channel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/channels/APP",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"channels",
+								"APP"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": ""
+		}
+	]
+}
