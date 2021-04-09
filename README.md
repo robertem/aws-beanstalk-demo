@@ -68,13 +68,13 @@ Check the package.json, it defines some scripts that will be used to deploy and 
 
 Generate artifact by executing `npm run build`. Your dist folder should look like this.
 
-<img src="images/eb-project-dist.png" width="500">
+<img src="images/eb-project-dist.png" width="200">
 
 Now, it's time to interact whit EB CLI, open a terminal in VSCode a run the command `eb init`.
 
 1. First, the EB CLI prompts you to select a region. Type the number that corresponds to the region that you want to use, and then press Enter.
 
-<img src="images/eb-init-region.png">
+<img src="images/eb-init-region.png" width="300">
 
 2. Next, provide your access-id and secret-key if it's the first time you are using EB CLI or AWS CLI.
 3. Type the name of your application (digital-channel-api by default)
@@ -82,7 +82,7 @@ Now, it's time to interact whit EB CLI, open a terminal in VSCode a run the comm
 5. Choose Yes to assign an SSH key pair. This allows you to connect to your instances.
 6. Select an existing key pair or create new one.
 
-<img src="images/eb-application-creation.png">
+<img src="images/eb-application-creation.png" width="400">
 
 Now, your EB CLI project is configured and ready to use. A config.yml was generated in elasticbeanstalk folder. Open it in the editor.
 
@@ -93,7 +93,7 @@ deploy:
   artifact: dist/artifact.zip
 ```
 
-<img src="images/eb-vscode-config.png">
+<img src="images/eb-vscode-config.png" width="400">
 
 It's time to create your first environment where infrastructure will be provisioned, run the command `eb create` in the terminal.
 
@@ -102,7 +102,7 @@ It's time to create your first environment where infrastructure will be provisio
 3. Choose the load balancer type to route traffic to our instances, for this kind of project like APIs, Application is the option.
 4. Disable Spot Fleet requests for the environment.
 
-<img src="images/eb-environment-creation.png">
+<img src="images/eb-environment-creation.png" width="400">
 
 EB CLI will start to provide the environment with all infrastructure and resources needed. You can see in the terminal the step by step. 
 
