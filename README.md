@@ -18,7 +18,7 @@ To build and run the applications, you can find the requeriments and how to setu
 
 For this method, we are using the application named [crew-api](https://github.com/robertem/aws-beanstalk-demo/tree/master/crew-api).
 
-First of all, you need to generate an artifact of your application which will be deployed in AWS. Follow the steps indicated in its README, this result in an artifact named crew-api.jar in target directory.
+First of all, you need to generate an artifact of your application which will be deployed in AWS. Follow the steps indicated in its README, this results in an artifact named crew-api.jar located in target directory.
 
 Open your [AWS Console](https://console.aws.amazon.com/) and login with your main account or user whit privileges like admin.
 
@@ -52,3 +52,64 @@ In the Environment properties section, add SERVER_PORT property and set the valu
 That's all!, you have your application ready to be used. To test it, use the postman given in the application directory and change host variable whit the URL provided in your environment.
 
 <img src="images/console-environment-success.png" width="500">
+
+## Deploying application by EB CLI
+
+For this method, we are using the application named [digital-channel-api](https://github.com/robertem/aws-beanstalk-demo/tree/master/digital-banking-api). Please check the requirements specified in its README before going steps below.
+
+To deploy this application, it's just necessary a terminal, but we will use [VSCode](https://code.visualstudio.com/download) to explore and modify files in the project.
+
+First of all, clone the repo and open application folder in VSCode. 
+
+Check the package.json, it defines some scripts that will be used to deploy and run the application in Beanstalk.
+
+- build: Command used to generate and compress the source code that will be uploaded. It generates a artifact.zip in dist folder.
+- start: Beanstalk by default execute this command to run the application after being deployed.
+
+Generate artifact by executing `npm run build`. Your dist folder should look like this.
+
+<img src="images/eb-project-dist.png" width="500">
+
+Now, it's time to interact whit EB CLI, open a terminal in VSCode a run the command `eb init`.
+
+1. First, the EB CLI prompts you to select a region. Type the number that corresponds to the region that you want to use, and then press Enter.
+
+<img src="images/eb-init-region.png">
+
+2. Next, provide your access-id and secret-key if it's the first time you are using EB CLI or AWS CLI.
+3. Type the name of your application (digital-channel-api by default)
+4. EB CLI scan your project and suggest you are using NodeJS, confirm this. Otherwise you have to select other platform that matches the language or framework of your project.
+5. Choose Yes to assign an SSH key pair. This allows you to connect to your instances.
+6. Select an existing key pair or create new one.
+
+<img src="images/eb-application-creation.png">
+
+Now, your EB CLI project is configured and ready to use. A config.yml was generated in elasticbeanstalk folder. Open it in the editor.
+
+We need to specify to Beanstalk where is the source code we want to deploy, in our case is dist/artifact.zip, if you don't, EB CLI deploy project folder by default. Add the following lines and save the changes.
+
+```yaml
+deploy:
+  artifact: dist/artifact.zip
+```
+
+<img src="images/eb-vscode-config.png">
+
+It's time to create your first environment where infrastructure will be provisioned, run the command `eb create` in the terminal.
+
+1. Type the environment name (digital-banking-api-dev).
+2. Type the DNS NAME prefix (digital-banking-api-dev), it will be part of the URL provided by Beanstalk.
+3. Choose the load balancer type to route traffic to our instances, for this kind of project like APIs, Application is the option.
+4. Disable Spot Fleet requests for the environment.
+
+<img src="images/eb-environment-creation.png">
+
+EB CLI will start to provide the environment with all infrastructure and resources needed. You can see in the terminal the step by step. 
+
+That's all, when the process is finished, you will see in your AWS console a new application and its environment like the first demo. To test it, use the postman given in the application directory and change host variable whit the URL provided in your environment. 
+
+<img src="images/eb-environment-success.png" width="500">
+
+If you want to deploy an update of your project, just run `eb deploy`.
+
+For more information about eb commands, check this [link](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-cmd-commands.html).
