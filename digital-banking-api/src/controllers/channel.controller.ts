@@ -2,23 +2,17 @@ import {Router, Request, Response} from 'express';
 import {Channel} from './../models/channel.model';
 
 const router: Router = Router();
-let channels: Channel[] = [{
-    id: 'APP',
-    name: 'Mobile Banking',
-    description: 'Mobile application supported for Android and iOS'
-}, {
-    id: 'BPI',
-    name: 'Internet Banking',
-    description: 'Web application'
-}];
 
 router.get('/', async (req: Request, res: Response) => {
-    res.send(channels);
+    res.send(await Channel.findAll());
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
     const {id} = req.params;
-    res.send(channels.filter(channel => channel.id === id));
+    
+    const item = await Channel.findByPk(id);
+
+    res.send(item);
 });
 
 router.post('/', async (req: Request, res: Response) => {
@@ -34,14 +28,18 @@ router.post('/', async (req: Request, res: Response) => {
         return res.status(400).send({message: 'Name is required.'});
     }
 
-    let channel = await new Channel();
-    channel.id = id;
-    channel.name = name;
-    channel.description = description;
+    const saveItem = await Channel.findOrCreate({
+        where: {
+            id: id
+        }, 
+        defaults: {
+            id: id, 
+            name: name,
+            description: description
+        }
+    });
 
-    channels.push(channel);
-
-    res.status(201).send(channel);
+    res.status(201).send(saveItem);
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
@@ -53,9 +51,14 @@ router.put('/:id', async (req: Request, res: Response) => {
         return res.status(400).send({message: 'Name is required.'});
     }
 
-    const index = channels.findIndex(channel => channel.id === id);
-    channels[index].name = name;
-    channels[index].description = description;
+    await Channel.update({
+        name: name,
+        description: description
+    }, {
+        where: {
+            id: id
+        }
+    });
 
     res.sendStatus(204);
 });
@@ -63,7 +66,11 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
     const {id} = req.params;
 
-    channels = channels.filter(channel => channel.id !== id);
+    await Channel.destroy({
+        where: {
+            id: id
+        }
+    });
 
     res.sendStatus(204);
 });

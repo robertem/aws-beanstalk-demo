@@ -2,21 +2,17 @@ import {Router, Request, Response} from 'express';
 import {Bank} from './../models/bank.model';
 
 const router: Router = Router();
-let banks: Bank[] = [{
-    id: 'IBK',
-    name: 'Banco Internacional del Perú'
-}, {
-    id: 'BCP',
-    name: 'Banco de Crédito del Perú'
-}];
 
 router.get('/', async (req: Request, res: Response) => {
-    res.send(banks);
+    res.send(await Bank.findAll());
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
     const {id} = req.params;
-    res.send(banks.filter(bank => bank.id === id));
+
+    const item = await Bank.findByPk(id);
+
+    res.send(item);
 });
 
 router.post('/', async (req: Request, res: Response) => {
@@ -31,13 +27,17 @@ router.post('/', async (req: Request, res: Response) => {
         return res.status(400).send({message: 'Name is required.'});
     }
 
-    let bank = await new Bank();
-    bank.id = id;
-    bank.name = name;
+    const saveItem = await Bank.findOrCreate({
+        where: {
+            id: id
+        }, 
+        defaults: {
+            id: id, 
+            name: name
+        }
+    });
 
-    banks.push(bank);
-
-    res.status(201).send(bank);
+    res.status(201).send(saveItem);
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
@@ -48,8 +48,13 @@ router.put('/:id', async (req: Request, res: Response) => {
         return res.status(400).send({message: 'Name is required.'});
     }
 
-    const index = banks.findIndex(bank => bank.id === id);
-    banks[index].name = name;
+    await Bank.update({
+        name: name
+    }, {
+        where: {
+            id: id
+        }
+    });
 
     res.sendStatus(204);
 });
@@ -57,7 +62,11 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
     const {id} = req.params;
 
-    banks = banks.filter(bank => bank.id !== id);
+    await Bank.destroy({
+        where: {
+            id: id
+        }
+    });
 
     res.sendStatus(204);
 });
